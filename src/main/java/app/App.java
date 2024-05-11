@@ -1,11 +1,9 @@
 package app;
 
-import app.user.User;
 import app.user.UserDao;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import javax.servlet.annotation.MultipartConfig;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +32,7 @@ public class App {
             );
         });
 
-        //Pagina d'iscrizione
+        //Pagina di registrazione
         get("/signup", (req, res) -> {
             Map<Object, Object> model = new HashMap<>();
             return new HandlebarsTemplateEngine().render(
@@ -42,15 +40,18 @@ public class App {
             );
         });
 
-        //Iscrizione di un nuovo utente
+        //Registrazione di un nuovo utente
         post("/signup", (req, res) -> {
-            String name = req.queryParams("nome");
-            String surname = req.queryParams("cognome");
+            String name = req.queryParams("name");
+            String surname = req.queryParams("surname");
             String email = req.queryParams("email");
             String username = req.queryParams("username");
             String password = req.queryParams("password");
 
-            String errorMessage = "";
+            String errorMessage;
+
+            System.out.println(name);
+            System.out.println(surname);
 
             int error = 0;
 
@@ -101,8 +102,27 @@ public class App {
                 res.redirect("/login");
             }
             else {
-                System.out.println(errorMessage);
+                Map<Object, Object> model = new HashMap<>();
+
+                //Passo a model il messaggio di errore
+                model.put("errorMessage", errorMessage);
+
+                //Passo anche i vari campi, altrimenti vengono cancellati
+                model.put("name", name);
+                model.put("surname", surname);
+                model.put("email", email);
+                model.put("username", username);
+
+                return new HandlebarsTemplateEngine().render(
+                        new ModelAndView(model, "layouts/signup.hbs")
+                );
             }
+            return null;
+        });
+
+        //Login di un utente
+        post("/login", (req, res) -> {
+
             return null;
         });
     }

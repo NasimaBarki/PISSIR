@@ -40,12 +40,16 @@ public class UserDao {
     private int checkUserParams(String name, String surname, String email, String username, String password) {
         int error = 0;
 
+        //TODO nome, cognome e username devono essere almeno lunghi uno
+        //TODO per qualche motivo è accettabile anche idk#g?
+        //TODO fare in modo che ci siano almeno tre lettere nell'username
+
         //Controlla se il nome contiene solo lettere
-        if(!isLettersOnly(name)){
+        if(isNotLettersOnly(name)){
             error = 1;
         }
         //Controlla se il cognome contiene solo lettere
-        else if(!isLettersOnly(surname)) {
+        else if(isNotLettersOnly(surname)) {
             error = 2;
         }
         //Controlla se l'username è più lungo di MAX_USERNAME_LENGTH
@@ -94,7 +98,7 @@ public class UserDao {
 
     private boolean containsSpecialChar(String word) {
         for(int i = 0; i<word.length(); i++){
-            if(word.charAt(i) >= 33 || word.charAt(i) <= 47){
+            if(word.charAt(i) >= 33 && word.charAt(i) <= 47){
                 return true;
             }
         }
@@ -103,7 +107,7 @@ public class UserDao {
 
     private boolean containsNumber(String word) {
         for(int i = 0; i<word.length(); i++){
-            if(word.charAt(i) >= 48 || word.charAt(i) <= 57){
+            if(word.charAt(i) >= 48 && word.charAt(i) <= 57){
                 return true;
             }
         }
@@ -112,7 +116,7 @@ public class UserDao {
 
     private boolean containsLower(String word) {
         for(int i = 0; i<word.length(); i++){
-            if(word.charAt(i) >= 97 || word.charAt(i) <= 122){
+            if(word.charAt(i) >= 97 && word.charAt(i) <= 122){
                 return true;
             }
         }
@@ -121,16 +125,16 @@ public class UserDao {
 
     private boolean containsUpper(String word) {
         for(int i = 0; i<word.length(); i++){
-            if(word.charAt(i) >= 65 || word.charAt(i) <= 90){
+            if(word.charAt(i) >= 65 && word.charAt(i) <= 90){
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isLettersOnly(String word) {
+    private boolean isNotLettersOnly(String word) {
         for(int i = 0; i<word.length(); i++){
-            if((word.charAt(i) < 65 || word.charAt(i) > 90) || (word.charAt(i) < 97 || word.charAt(i) > 122)){
+            if (!Character.isLetter(word.charAt(i))){
                 return true;
             }
         }

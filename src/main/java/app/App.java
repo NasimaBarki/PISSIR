@@ -83,16 +83,16 @@ public class App {
                     errorMessage = "La password deve contenere almeno un carattere speciale."; //TODO specificare quali caratteri speciali
                     break;
                 case 9:
-                    errorMessage = "Il nome non può essere vuoto.";
+                    errorMessage = "Il nome deve contenere almeno tre caratteri.";
                     break;
                 case 10:
-                    errorMessage = "Il cognome non può essere vuoto.";
+                    errorMessage = "Il cognome deve contenere almeno tre caratteri.";
                     break;
                 case 11:
                     errorMessage = "L'email non può essere vuota.";
                     break;
                 case 12:
-                    errorMessage = "L'username non può essere vuoto.";
+                    errorMessage = "L'username deve contenere almeno tre caratteri.";
                     break;
                 default:
                     errorMessage = "Spiacenti, si è verificato un errore.";

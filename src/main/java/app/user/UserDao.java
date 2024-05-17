@@ -1,11 +1,13 @@
 package app.user;
 
 import app.utils.DBConnect;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 import java.sql.*;
 
 public class UserDao {
     private static final int MAX_USERNAME_LENGTH = 25;
+    private static final int MIN_FIELD_LENGTH = 3;
 
     public int addUser(String name, String surname, String email, String username, String password) {
         final String sql = "INSERT INTO users(name, surname, email, username, password) VALUES (?, ?, ?, ?, ?)";
@@ -21,11 +23,17 @@ public class UserDao {
         try{
             Connection conn = DBConnect.getInstance().getConnection();
             PreparedStatement st = conn.prepareStatement(sql);
+
+            //Hashing della password
+            String passwordBCrypt = BCrypt.withDefaults().hashToString(10, password.toCharArray());
+
+            //TODO fare in modo che nome e cognome abbiano solo la prima lettera maiuscola
+
             st.setString(1, name);
             st.setString(2, surname);
             st.setString(3, email);
             st.setString(4, username);
-            st.setString(5, password);
+            st.setString(5, passwordBCrypt);
 
             st.executeUpdate();
 
@@ -40,9 +48,7 @@ public class UserDao {
     private int checkUserParams(String name, String surname, String email, String username, String password) {
         int error = 0;
 
-        //TODO nome, cognome e username devono essere almeno lunghi uno
-        //TODO per qualche motivo è accettabile anche idk#g?
-        //TODO fare in modo che ci siano almeno tre lettere nell'username
+        //TODO per qualche motivo è accettabile anche idk@g?
 
         //Controlla se il nome contiene solo lettere
         if(isNotLettersOnly(name)){
@@ -76,20 +82,20 @@ public class UserDao {
         else if(!containsSpecialChar(password)) {
             error = 8;
         }
-        //Controlla se il nome è vuoto
-        else if(name.isEmpty()){
+        //Controlla se il nome è almeno lungo tre caratteri
+        else if(name.length() < MIN_FIELD_LENGTH){
             error = 9;
         }
-        //Controlla se il cognome è vuoto
-        else if(surname.isEmpty()){
+        //Controlla se il cognome è almeno lungo tre caratteri
+        else if(surname.length() < MIN_FIELD_LENGTH){
             error = 10;
         }
         //Controlla se l'email è vuota
         else if(email.isEmpty()){
             error = 11;
         }
-        //Controlla se lo username è vuoto
-        else if(username.isEmpty()){
+        //Controlla se lo username è almeno lungo tre caratteri
+        else if(username.length() < MIN_FIELD_LENGTH){
             error = 12;
         }
 

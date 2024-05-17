@@ -50,9 +50,6 @@ public class App {
 
             String errorMessage;
 
-            System.out.println(name);
-            System.out.println(surname);
-
             int error = 0;
 
             error = userDao.addUser(name, surname, email, username, password);
@@ -122,6 +119,29 @@ public class App {
 
         //Login di un utente
         post("/login", (req, res) -> {
+            String username = req.queryParams("username");
+            String password = req.queryParams("password");
+
+            String errorMessage = "L'utente o la password sono errati.";
+
+            int error = 0;
+
+            error = userDao.getUser(username, password);
+
+            if(error == 0){
+                res.redirect("/");
+            }
+            else {
+                Map<Object, Object> model = new HashMap<>();
+
+                //Passo a model il messaggio di errore e l'username
+                model.put("errorMessage", errorMessage);
+                model.put("username", username);
+
+                return new HandlebarsTemplateEngine().render(
+                        new ModelAndView(model, "layouts/login.hbs")
+                );
+            }
 
             return null;
         });

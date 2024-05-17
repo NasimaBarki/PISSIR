@@ -45,10 +45,47 @@ public class UserDao {
         return error;
     }
 
+    //TODO dire all'utente se ha sbagliato utente o password
+    public int getUser(String username, String password) {
+        final String sql = "SELECT username, password FROM users WHERE username = ?";
+
+        int error;
+
+        try{
+            Connection conn = DBConnect.getInstance().getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, username);
+
+            ResultSet rs = st.executeQuery();
+
+            if(rs.next()){
+
+                String storedBCrypt = rs.getString("password");
+                BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), storedBCrypt);
+
+                if(result.verified){
+                    error = 0;
+                }
+                else {
+                    error = 2;
+                }
+            } else {
+                error = 1;
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return error;
+    }
+
     private int checkUserParams(String name, String surname, String email, String username, String password) {
         int error = 0;
 
         //TODO per qualche motivo è accettabile anche idk@g?
+        //TODO controllare se l'email e l'username esistono già nel database
 
         //Controlla se il nome contiene solo lettere
         if(isNotLettersOnly(name)){

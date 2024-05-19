@@ -12,7 +12,7 @@ public class UserDao {
     public int addUser(String name, String surname, String email, String username, String password) {
         final String sql = "INSERT INTO users(name, surname, email, username, password) VALUES (?, ?, ?, ?, ?)";
 
-        int error = 0;
+        int error;
 
         error = checkUserParams(name, surname, email, username, password);
 
@@ -28,6 +28,7 @@ public class UserDao {
             String passwordBCrypt = BCrypt.withDefaults().hashToString(10, password.toCharArray());
 
             //TODO fare in modo che nome e cognome abbiano solo la prima lettera maiuscola
+            //TODO Controllare che email e username non ci siano nel database
 
             st.setString(1, name);
             st.setString(2, surname);

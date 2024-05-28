@@ -9,7 +9,7 @@ import static spark.Spark.*;
 
 public class App {
     public static void main(String[] args) {
-
+        port(8000);
         staticFileLocation("/public");
 
         //Index
@@ -17,7 +17,7 @@ public class App {
 
         //Login
         Spark.get("/login", LoginController.serveLoginPage);
-        Spark.post("/login", LoginController.handleLoginPost);
+        //Spark.post("/login", LoginController.handleLoginPost);
 
         //Registrazione
         Spark.get("/signup", SignupController.serveSignupPage);

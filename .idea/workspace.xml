@@ -64,20 +64,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-1.8 (2)&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/barki/Downloads/fitbit-java-V2&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/barki/Desktop/PISSIR/src/main/java/org/example/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "corretto-1.8 (2)",
+    "last_opened_file_path": "C:/Users/barki/Desktop/PISSIR/src/main/resources",
+    "onboarding.tips.debug.path": "C:/Users/barki/Desktop/PISSIR/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\barki\Desktop\PISSIR\src\main\resources" />
@@ -85,6 +85,9 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\barki\Desktop\PISSIR\src\main\resources\views\layouts" />
       <recent name="C:\Users\barki\Desktop\PISSIR\src\main\resources\templates\js-view" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="app.utils" />
     </key>
   </component>
   <component name="RunManager">

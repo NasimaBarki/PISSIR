@@ -2,21 +2,8 @@
     <a class="navbar-brand" href="/">MWBot</a>
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0">
-            {{#if authenticated}}
-                <div class="dropdown">
-                    <a class="nav-item dropdown-toggle my-sm-0 fw-bold" href="#" role="button" data-toggle="dropdown">{{username}}</a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <form method="post">
-                                <button class="dropdown-item" type="submit">Logout</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            {{else}}
-                <a class="nav-item my-sm-0 fw-bold" href="/login">Login</a>
-            {{/if}}
+        <form class="form-inline my-2 my-lg-0" method="post" action="/login">
+            <button class="nav-item my-sm-0 fw-bold" type="submit">Login</button>
         </form>
     </div>
 </nav>

@@ -17,7 +17,6 @@ public class IndexController {
         Map<Object, Object> model = new HashMap<>();
 
         if(username != null){
-            System.out.println(username);
             model.put("username", username);
         }
 

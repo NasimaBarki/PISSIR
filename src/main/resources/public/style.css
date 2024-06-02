@@ -1,5 +1,6 @@
 .nav-item,
-.navbar-brand {
+.navbar-brand,
+.nav-link {
     color: black !important;
 }
 
@@ -17,6 +18,6 @@
     padding: 2%;
 }
 
-#error {
+#error, #errorRecharge {
     color: red;
 }

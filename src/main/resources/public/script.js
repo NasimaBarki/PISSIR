@@ -1,6 +1,6 @@
 "use strict";
 
-function showNextSectionOfForm() {
-    document.getElementById("rechargeFormPartOne").style.display = 'none';
-    document.getElementById("rechargeFormPartTwo").style.display = 'block';
+function showSecondForm() {
+    document.getElementById('rechargeFormPartTwo').style.display = 'block';
+    document.getElementById('next').style.display = 'none';
 }

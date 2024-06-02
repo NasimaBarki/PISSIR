@@ -9,6 +9,8 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 import java.util.HashMap;
 import java.util.Map;
 
+import static spark.Spark.halt;
+
 public class RechargeController {
     //Pagina in cui si vede lo stato della ricarica
     public static Route serveRechargePage = (Request req, Response res) -> {
@@ -16,9 +18,8 @@ public class RechargeController {
         Map<Object, Object> model = new HashMap<>();
 
         if(username != null){
-            System.out.println(username);
             model.put("username", username);
-        }
+        } else halt(401, "Devi accedere per visualizzare questa pagina.");
 
         return new HandlebarsTemplateEngine().render(
                 new ModelAndView(model, "layouts/recharge.hbs")
@@ -31,9 +32,11 @@ public class RechargeController {
         Map<Object, Object> model = new HashMap<>();
 
         if(username != null){
-            System.out.println(username);
             model.put("username", username);
-        }
+        } else halt(401, "Devi accedere per visualizzare questa pagina.");
+
+        int rechargeQueue = RechargeDao.getNumberOfRechargeRequests();
+        model.put("rechargeQueue", rechargeQueue);
 
         return new HandlebarsTemplateEngine().render(
                 new ModelAndView(model, "layouts/rechargeRequest.hbs")
@@ -42,6 +45,19 @@ public class RechargeController {
 
     //In caso di conferma di ricarica si ha una redirect
     public static Route handleRechargePost = (Request req, Response res) -> {
+        String percentage = req.queryParams("percentage");
+        String notification = req.queryParams("notification");
+        String username = req.session().attribute("username");
+        int notificationBool = 0;
+
+        if(notification == "yes"){
+            notificationBool = 1;
+        }
+
+        Recharge recharge = new Recharge(username, Integer.parseInt(percentage), notificationBool);
+
+
+        RechargeDao.addRechargeRequest(recharge);
         res.redirect("/recharge");
 
         return null;

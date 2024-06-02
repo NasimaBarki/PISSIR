@@ -1,27 +1,26 @@
 package app;
 
 import app.index.IndexController;
-import app.keycloak.KeycloakController;
+import app.login.LoginController;
+import app.signup.SignupController;
 import spark.Spark;
 
 import static spark.Spark.*;
-import org.keycloak.admin.client.Keycloak;
 
 public class App {
     public static void main(String[] args) {
         port(8000);
         staticFileLocation("/public");
 
-        before((req, res) -> {
-            if(req.attribute("code") != null){
-                System.out.println((char[]) req.attribute("code"));
-            }
-        });
-
         //Index
         Spark.get("/", IndexController.serveIndexPage);
 
-        //Login e registrazione tramite keycloak
-        Spark.post("/login", KeycloakController.serveKeycloak);
+        //Login
+        Spark.get("/login", LoginController.serveLoginPage);
+        Spark.post("/login", LoginController.handleLoginPost);
+
+        //Registrazione
+        Spark.get("/signup", SignupController.serveSignupPage);
+        Spark.post("/signup", SignupController.handleSignupPost);
     }
 }

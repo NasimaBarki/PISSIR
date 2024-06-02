@@ -13,6 +13,7 @@ public class IndexController {
 
     //Visualizza la pagina home
     public static Route serveIndexPage = (Request req, Response res) -> {
+        System.out.println(req.session());
 
         Map<Object, Object> model = new HashMap<>();
 

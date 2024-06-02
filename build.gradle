@@ -22,8 +22,6 @@ dependencies {
     implementation group: 'com.sparkjava', name: 'spark-template-handlebars', version: '2.7.1'
     implementation group: 'org.projectlombok', name: 'lombok', version:'1.16.6'
     implementation group: 'at.favre.lib', name: 'bcrypt', version: '0.9.0'
-
-    implementation group: 'org.keycloak', name: 'keycloak-admin-client', version: '12.0.4'
 }
 
 test {

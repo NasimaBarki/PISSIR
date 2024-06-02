@@ -3,14 +3,12 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <form class="form-inline my-2 my-lg-0">
-            {{#if authenticated}}
+            {{#if username}}
                 <div class="dropdown">
                     <a class="nav-item dropdown-toggle my-sm-0 fw-bold" href="#" role="button" data-toggle="dropdown">{{username}}</a>
                     <ul class="dropdown-menu">
                         <li>
-                            <form action="/logout" method="post">
-                                <button class="dropdown-item" type="submit">Logout</button>
-                            </form>
+                            <a class="dropdown-item" href="/logout">Logout</a>
                         </li>
                     </ul>
                 </div>

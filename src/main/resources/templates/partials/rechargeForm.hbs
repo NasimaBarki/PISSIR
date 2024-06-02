@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form method="post">
+                <div id="rechargeFormPartOne">
+                    <h2>Richiesta di Ricarica</h2>
+                    <label for="percentage">Percentuale di ricarica da raggiungere:</label>
+                    <input type="number" id="percentage" name="percentage" min="1" max="100">
+                    <input type="submit">
+
+                    <p>Desideri ricevere una notifica?</p>
+                    <input type="radio" id="yes" name="notification" value="yes">
+                    <label for="html">Sì, desidero ricevere una notifica.</label><br>
+                    <input type="radio" id="css" name="notification" value="no">
+                    <label for="css">No, non desidero ricevere una notifica.</label><br>
+
+                    <button type="button" onclick="showNextSectionOfForm()">Prosegui</button>
+                </div>
+
+                <div id="rechargeFormPartTwo" style="display: none;">
+                    <p>Auto in coda: {{rechargeQueue}}</p>
+
+                    <p>Desideri accettare la prestazione?</p>
+                    <button type="submit">Sì</button>
+                    <a href="/recharge">No</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

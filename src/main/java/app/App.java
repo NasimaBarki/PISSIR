@@ -2,6 +2,8 @@ package app;
 
 import app.index.IndexController;
 import app.login.LoginController;
+import app.logout.LogoutController;
+import app.recharge.RechargeController;
 import app.signup.SignupController;
 import spark.Spark;
 
@@ -22,5 +24,13 @@ public class App {
         //Registrazione
         Spark.get("/signup", SignupController.serveSignupPage);
         Spark.post("/signup", SignupController.handleSignupPost);
+
+        //Logout
+        Spark.get("/logout", LogoutController.handleLogoutPost);
+
+        //Ricariche
+        Spark.get("/recharge", RechargeController.serveRechargePage);
+        Spark.get("/rechargeRequest", RechargeController.serveRechargeRequest);
+        Spark.post("/rechargeRequest", RechargeController.handleRechargePost);
     }
 }

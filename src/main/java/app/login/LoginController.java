@@ -34,7 +34,8 @@ public class LoginController {
         error = userDao.getUser(username, password);
 
         if(error == 0){
-            res.redirect("/");
+            req.session(true).attribute("username", username);
+            res.redirect("/recharge");
         }
         else {
             Map<Object, Object> model = new HashMap<>();

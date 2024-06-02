@@ -13,9 +13,13 @@ public class IndexController {
 
     //Visualizza la pagina home
     public static Route serveIndexPage = (Request req, Response res) -> {
-        System.out.println(req.session());
-
+        String username = req.session().attribute("username");
         Map<Object, Object> model = new HashMap<>();
+
+        if(username != null){
+            System.out.println(username);
+            model.put("username", username);
+        }
 
         return new HandlebarsTemplateEngine().render(
                 new ModelAndView(model, "layouts/index.hbs")

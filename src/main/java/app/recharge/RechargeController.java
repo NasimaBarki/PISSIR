@@ -21,6 +21,12 @@ public class RechargeController {
             model.put("username", username);
         } else halt(401, "Devi accedere per visualizzare questa pagina.");
 
+        int rechargeQueue = RechargeDao.getNumberOfRechargeRequests();
+        Recharge recharge = RechargeDao.getRechargeRequest(username);
+
+        model.put("rechargeQueue", rechargeQueue);
+        model.put("percentage", recharge.getPercentage());
+
         return new HandlebarsTemplateEngine().render(
                 new ModelAndView(model, "layouts/recharge.hbs")
         );
@@ -34,6 +40,11 @@ public class RechargeController {
         if(username != null){
             model.put("username", username);
         } else halt(401, "Devi accedere per visualizzare questa pagina.");
+
+        if(req.session().attribute("errorMessage") != null){
+            model.put("errorMessage", req.session().attribute("errorMessage"));
+            model.put("percentage", req.session().attribute("percentage"));
+        }
 
         int rechargeQueue = RechargeDao.getNumberOfRechargeRequests();
         model.put("rechargeQueue", rechargeQueue);
@@ -57,8 +68,17 @@ public class RechargeController {
         Recharge recharge = new Recharge(username, Integer.parseInt(percentage), notificationBool);
 
 
-        RechargeDao.addRechargeRequest(recharge);
-        res.redirect("/recharge");
+        int error = RechargeDao.addRechargeRequest(recharge);
+
+        if(error == 1){
+            String errorMessage = "È già presente una richiesta di ricarica.";
+            req.session().attribute("errorMessage", errorMessage);
+            req.session().attribute("percentage", percentage);
+            res.redirect("/rechargeRequest");
+        }
+        else {
+            res.redirect("/recharge");
+        }
 
         return null;
     };

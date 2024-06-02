@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignupController {
+    //TODO aggiustare la post in modo tale che non crei un nuovo model ogni volta ma che passi i parametri alla get
     static UserDao userDao = new UserDao();
 
     //Visualizza la pagina di registrazione

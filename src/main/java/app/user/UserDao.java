@@ -6,6 +6,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.sql.*;
 
 public class UserDao {
+    //TODO usare il costruttore user al posto di passare tutti i parametri
     private static final int MAX_USERNAME_LENGTH = 25;
     private static final int MIN_FIELD_LENGTH = 3;
 

@@ -3,6 +3,7 @@ package app;
 import app.index.IndexController;
 import app.login.LoginController;
 import app.logout.LogoutController;
+import app.parkingSpot.ParkingSpotController;
 import app.recharge.RechargeController;
 import app.signup.SignupController;
 import spark.Spark;
@@ -32,5 +33,8 @@ public class App {
         Spark.get("/recharge", RechargeController.serveRechargePage);
         Spark.get("/rechargeRequest", RechargeController.serveRechargeRequest);
         Spark.post("/rechargeRequest", RechargeController.handleRechargePost);
+
+        //Monitorazione posti
+        Spark.get("/parkingSpots", ParkingSpotController.serverParkingPage);
     }
 }

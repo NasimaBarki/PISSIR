@@ -1,5 +1,6 @@
 package app.signup;
 
+import app.user.User;
 import app.user.UserDao;
 import spark.ModelAndView;
 import spark.Request;
@@ -11,12 +12,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignupController {
-    //TODO aggiustare la post in modo tale che non crei un nuovo model ogni volta ma che passi i parametri alla get
     static UserDao userDao = new UserDao();
 
     //Visualizza la pagina di registrazione
     public static Route serveSignupPage = (Request req, Response res) -> {
         Map<Object, Object> model = new HashMap<>();
+
+        if(req.session().attribute("errorMessage") != null){
+            model.put("errorMessage", req.session().attribute("errorMessage"));
+            model.put("name", req.session().attribute("name"));
+            model.put("surname", req.session().attribute("surname"));
+            model.put("email", req.session().attribute("email"));
+            model.put("username", req.session().attribute("username"));
+        }
         return new HandlebarsTemplateEngine().render(
                 new ModelAndView(model, "layouts/signup.hbs")
         );
@@ -29,12 +37,14 @@ public class SignupController {
         String email = req.queryParams("email");
         String username = req.queryParams("username");
         String password = req.queryParams("password");
+        int role = 0;
 
         String errorMessage;
 
         int error;
 
-        error = userDao.addUser(name, surname, email, username, password);
+        User user = new User(name, surname, email, username, password, role);
+        error = userDao.addUser(user);
 
         switch(error) {
             case 1:
@@ -81,20 +91,13 @@ public class SignupController {
             res.redirect("/login");
         }
         else {
-            Map<Object, Object> model = new HashMap<>();
+            req.session().attribute("name", name);
+            req.session().attribute("surname", surname);
+            req.session().attribute("email", email);
+            req.session().attribute("username", username);
+            req.session().attribute("errorMessage", errorMessage);
 
-            //Passo a model il messaggio di errore
-            model.put("errorMessage", errorMessage);
-
-            //Passo anche i vari campi, altrimenti vengono cancellati
-            model.put("name", name);
-            model.put("surname", surname);
-            model.put("email", email);
-            model.put("username", username);
-
-            return new HandlebarsTemplateEngine().render(
-                    new ModelAndView(model, "layouts/signup.hbs")
-            );
+            res.redirect("/signup");
         }
         return null;
     };

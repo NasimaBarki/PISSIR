@@ -9,7 +9,9 @@ public class LogoutController {
 
     public static Route handleLogoutPost = (Request req, Response res) -> {
         //Rimozione della sessione
-        req.session().removeAttribute("username");
+        req.session().removeAttribute("authenticated");
+        req.session().removeAttribute("premium");
+        req.session().removeAttribute("admin");
         res.redirect("/");
 
         return null;

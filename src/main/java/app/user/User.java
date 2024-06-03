@@ -6,16 +6,16 @@ public class User {
     private final String email;
     private final String username;
     private final String password;
-    private final int role;
+    private final int type;
 
     //Costruttore
-    public User(String name, String lastName, String email, String username, String password, int role) {
+    public User(String name, String lastName, String email, String username, String password, int type) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.type = type;
     }
 
     //Getters
@@ -39,7 +39,7 @@ public class User {
         return password;
     }
 
-    public int getRole() {
-        return role;
+    public int getType() {
+        return type;
     }
 }

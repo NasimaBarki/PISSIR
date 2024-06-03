@@ -8,24 +8,38 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static spark.Spark.halt;
 
 public class RechargeController {
+    //TODO vedere se ha senso poter annullare una ricarica
+
     //Pagina in cui si vede lo stato della ricarica
     public static Route serveRechargePage = (Request req, Response res) -> {
-        String username = req.session().attribute("username");
+        String username = req.session().attribute("authenticated");
+        String premium = req.session().attribute("premium");
+        String admin = req.session().attribute("admin");
         Map<Object, Object> model = new HashMap<>();
 
         if(username != null){
-            model.put("username", username);
+            model.put("authenticated", username);
         } else halt(401, "Devi accedere per visualizzare questa pagina.");
+
+        if (premium != null){
+            model.put("premium", premium);
+        }
+        if (admin != null){
+            model.put("admin", admin);
+        }
 
         int rechargeQueue = RechargeDao.getNumberOfRechargeRequests();
         Recharge recharge = RechargeDao.getRechargeRequest(username);
 
-        model.put("rechargeQueue", rechargeQueue);
-        model.put("percentage", recharge.getPercentage());
+        if(recharge != null){
+            model.put("rechargeQueue", rechargeQueue);
+            model.put("percentage", recharge.getPercentage());
+        }
 
         return new HandlebarsTemplateEngine().render(
                 new ModelAndView(model, "layouts/recharge.hbs")
@@ -34,12 +48,21 @@ public class RechargeController {
 
     //Form per la richiesta di ricarica
     public static Route serveRechargeRequest = (Request req, Response res) -> {
-        String username = req.session().attribute("username");
+        String username = req.session().attribute("authenticated");
+        String premium = req.session().attribute("premium");
+        String admin = req.session().attribute("admin");
         Map<Object, Object> model = new HashMap<>();
 
         if(username != null){
-            model.put("username", username);
+            model.put("authenticated", username);
         } else halt(401, "Devi accedere per visualizzare questa pagina.");
+
+        if (premium != null){
+            model.put("premium", premium);
+        }
+        if (admin != null){
+            model.put("admin", admin);
+        }
 
         if(req.session().attribute("errorMessage") != null){
             model.put("errorMessage", req.session().attribute("errorMessage"));
@@ -58,10 +81,10 @@ public class RechargeController {
     public static Route handleRechargePost = (Request req, Response res) -> {
         String percentage = req.queryParams("percentage");
         String notification = req.queryParams("notification");
-        String username = req.session().attribute("username");
+        String username = req.session().attribute("authenticated");
         int notificationBool = 0;
 
-        if(notification == "yes"){
+        if(Objects.equals(notification, "yes")){
             notificationBool = 1;
         }
 

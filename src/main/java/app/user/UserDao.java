@@ -6,16 +6,15 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.sql.*;
 
 public class UserDao {
-    //TODO usare il costruttore user al posto di passare tutti i parametri
     private static final int MAX_USERNAME_LENGTH = 25;
     private static final int MIN_FIELD_LENGTH = 3;
 
-    public int addUser(String name, String surname, String email, String username, String password) {
+    public int addUser(User newUser) {
         final String sql = "INSERT INTO users(name, surname, email, username, password) VALUES (?, ?, ?, ?, ?)";
 
         int error;
 
-        error = checkUserParams(name, surname, email, username, password);
+        error = checkUserParams(newUser.getName(), newUser.getLastName(), newUser.getEmail(), newUser.getUsername(), newUser.getPassword());
 
         if(error > 0){
             return error;
@@ -26,15 +25,15 @@ public class UserDao {
             PreparedStatement st = conn.prepareStatement(sql);
 
             //Hashing della password
-            String passwordBCrypt = BCrypt.withDefaults().hashToString(10, password.toCharArray());
+            String passwordBCrypt = BCrypt.withDefaults().hashToString(10, newUser.getPassword().toCharArray());
 
             //TODO fare in modo che nome e cognome abbiano solo la prima lettera maiuscola
             //TODO Controllare che email e username non ci siano nel database
 
-            st.setString(1, name);
-            st.setString(2, surname);
-            st.setString(3, email);
-            st.setString(4, username);
+            st.setString(1, newUser.getName());
+            st.setString(2, newUser.getLastName());
+            st.setString(3, newUser.getEmail());
+            st.setString(4, newUser.getUsername());
             st.setString(5, passwordBCrypt);
 
             st.executeUpdate();
@@ -47,8 +46,7 @@ public class UserDao {
         return error;
     }
 
-    //TODO dire all'utente se ha sbagliato utente o password
-    public int getUser(String username, String password) {
+    public int getUserReturnError(String username, String password) {
         final String sql = "SELECT username, password FROM users WHERE username = ?";
 
         int error;
@@ -184,5 +182,28 @@ public class UserDao {
             }
         }
         return false;
+    }
+
+    public User getUser(String username) {
+        User user = null;
+        final String sql = "SELECT name, surname, email, username, password, tipo FROM users WHERE username = ?";
+
+        try{
+            Connection conn = DBConnect.getInstance().getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, username);
+
+            ResultSet rs = st.executeQuery();
+
+            if(rs.next()){
+                user = new User(rs.getString("name"), rs.getString("surname"), rs.getString("email"), rs.getString("username"), rs.getString("password"), rs.getInt("tipo"));
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return user;
     }
 }

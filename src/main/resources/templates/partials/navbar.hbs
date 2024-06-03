@@ -2,18 +2,35 @@
     <a class="navbar-brand" href="/">MWBot</a>
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        {{#if username}}
+        {{#if authenticated}}
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/recharge">Ricariche</a>
-                </li>
+                {{#if premium}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Prenotazioni</a>
+                    </li>
+                {{/if}}
+                {{#if admin}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Monitora posti</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Prezzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pagamenti</a>
+                    </li>
+                {{else}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/recharge">Ricariche</a>
+                    </li>
+                {{/if}}
             </ul>
         {{/if}}
         <form class="form-inline my-2 my-lg-0">
-            {{#if username}}
+            {{#if authenticated}}
             <div class="dropdown">
                 <a class="nav-item dropdown-toggle my-sm-0 fw-bold" href="#" role="button"
-                    data-toggle="dropdown">{{username}}</a>
+                    data-toggle="dropdown">{{authenticated}}</a>
                 <ul class="dropdown-menu">
                     <li>
                         <a class="dropdown-item" href="/logout">Logout</a>

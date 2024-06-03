@@ -1,5 +1,7 @@
 package app.login;
 
+import app.index.IndexController;
+import app.user.User;
 import app.user.UserDao;
 import spark.ModelAndView;
 import spark.Request;
@@ -31,10 +33,19 @@ public class LoginController {
 
         int error;
 
-        error = userDao.getUser(username, password);
+        error = userDao.getUserReturnError(username, password);
+        User user = userDao.getUser(username);
 
         if(error == 0){
-            req.session(true).attribute("username", username);
+            req.session(true).attribute("authenticated", username);
+            req.session(true).attribute("type", user.getType());
+            int type = req.session().attribute("type");
+
+            if(type == 1){
+                req.session(true).attribute("premium", "true");
+            } else if (type == 2) {
+                req.session(true).attribute("admin", "true");
+            }
             res.redirect("/recharge");
         }
         else {

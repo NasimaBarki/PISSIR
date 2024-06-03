@@ -45,7 +45,6 @@ public class RechargeDao {
 
     }
 
-    //TODO Controllare che ci sia una sola richiesta di ricarica per utente
     public static int getNumberOfRechargeRequests() {
         final String sql = "SELECT completed FROM recharges WHERE completed = ?";
 

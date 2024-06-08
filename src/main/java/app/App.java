@@ -4,6 +4,7 @@ import app.index.IndexController;
 import app.login.LoginController;
 import app.logout.LogoutController;
 import app.parkingSpot.ParkingSpotController;
+import app.price.PriceController;
 import app.recharge.RechargeController;
 import app.signup.SignupController;
 import spark.Spark;
@@ -36,5 +37,9 @@ public class App {
 
         //Monitorazione posti
         Spark.get("/parkingSpots", ParkingSpotController.serverParkingPage);
+
+        //Prezzi
+        Spark.get("/price", PriceController.servePricePage);
+        Spark.post("/price/parking", "application/json", PriceController.handleParkingPriceChange);
     }
 }

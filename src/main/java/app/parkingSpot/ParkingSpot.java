@@ -1,5 +1,7 @@
 package app.parkingSpot;
 
+import java.util.ArrayList;
+
 public class ParkingSpot {
     private final int id;
     private final int available;

@@ -1,0 +1,13 @@
+<p>Prezzo corrente di sosta: {{parkingPrice}}€</p>
+<form action="/price/parking" method="post">
+    <p>Modifica il prezzo sosta:</p>
+    <input type="number" name="parking" step=".01"/>
+    <button type="submit">Aggiorna prezzo sosta</button>
+</form>
+
+<p>Prezzo corrente di ricarica: {{rechargingPrice}}€</p>
+<form id="recharging">
+    <p>Modifica il prezzo di ricarica</p>
+    <input type="number" name="parking" step=".01" />
+    <button type="submit">Aggiorna prezzo ricarica</button>
+</form>

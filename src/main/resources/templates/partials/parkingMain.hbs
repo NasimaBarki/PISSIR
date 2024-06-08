@@ -1,7 +1,27 @@
-<ul class="parkingSpot">
+<table>
+    <tr>
+        <th>Numero posto</th>
+        <th>Disponibilità</th>
+        <th>Prenotabile</th>
+    </tr>
+
     {{#each parkingSpot}}
-        <li>
-            {{this}}
-        </li>
+    <tr>
+        <td>{{id}}</td>
+        <td>
+            {{#if available}}
+                Occupato
+            {{else}}
+                Libero
+            {{/if}}
+        </td>
+        <td>
+            {{#if bookable}}
+                Prenotabile
+            {{else}}
+                Non prenotabile
+            {{/if}}
+        </td>
+    </tr>
     {{/each}}
-</ul>
+</table>

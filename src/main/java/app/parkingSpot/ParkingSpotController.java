@@ -1,5 +1,7 @@
 package app.parkingSpot;
 
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -7,9 +9,7 @@ import spark.Route;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import com.google.gson.Gson;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static spark.Spark.halt;
 
@@ -24,13 +24,17 @@ public class ParkingSpotController {
         if(username != null && admin != null){
             model.put("authenticated", username);
             model.put("admin", admin);
-        } else halt(401, "Devi accedere per visualizzare questa pagina.");
+        } else halt(401, "Devi accedere ed essere un admin per visualizzare questa pagina.");
 
         List<ParkingSpot> allParkingSpots = ParkingSpotDao.getAllParkingSpots();
-        Map<String, List<ParkingSpot>> finalJson = new HashMap<>();
-        finalJson.put("parkingSpots", allParkingSpots);
+        String parkingSpotJson = gson.toJson(allParkingSpots);
 
-        model.put("parkingSpot", gson.toJson(finalJson));
+        List<ParkingSpot> parkingSpots = gson.fromJson(parkingSpotJson, new TypeToken<List<ParkingSpot>>(){}.getType());
+        model.put("parkingSpot", parkingSpots);
+
+        for (ParkingSpot p : allParkingSpots){
+            System.out.println(p.getId());
+        }
 
         return new HandlebarsTemplateEngine().render(
                 new ModelAndView(model, "layouts/parking.hbs")

@@ -4,6 +4,7 @@ import app.index.IndexController;
 import app.login.LoginController;
 import app.logout.LogoutController;
 import app.parkingSpot.ParkingSpotController;
+import app.payment.PaymentController;
 import app.price.PriceController;
 import app.recharge.RechargeController;
 import app.reservation.ReservationController;
@@ -48,5 +49,10 @@ public class App {
         Spark.get("/reservation", ReservationController.serveReservationPage);
         Spark.get("/reservationRequest", ReservationController.serveReservationRequestPage);
         Spark.post("/reservationRequest", ReservationController.handleReservationPost);
+
+        //Pagamenti
+        Spark.get("/payment", PaymentController.servePaymentPage);
+
+        //TODO far sapere agli utenti i prezzi dei servizi
     }
 }

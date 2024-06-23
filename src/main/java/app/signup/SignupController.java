@@ -98,6 +98,7 @@ public class SignupController {
             req.session().attribute("surname", surname);
             req.session().attribute("email", email);
             req.session().attribute("username", username);
+            //TODO azzerrare l'error message altrimenti compare in altri form
             req.session().attribute("errorMessage", errorMessage);
 
             res.redirect("/signup");

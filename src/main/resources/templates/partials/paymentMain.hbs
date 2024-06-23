@@ -1,0 +1,23 @@
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Data</th>
+        <th>Ora</th>
+        <th>Servizio</th>
+        <th>Prezzo</th>
+        <th>Tipo Utente</th>
+    </tr>
+
+    {{#each payment}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{username}}</td>
+            <td>{{date}}</td>
+            <td>{{time}}</td>
+            <td>{{type}}</td>
+            <td>{{price}}</td>
+            <td>{{userType}}</td>
+        </tr>
+    {{/each}}
+</table>

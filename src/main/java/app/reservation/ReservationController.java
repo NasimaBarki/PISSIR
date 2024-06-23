@@ -2,14 +2,23 @@ package app.reservation;
 
 import app.parkingSpot.ParkingSpot;
 import app.parkingSpot.ParkingSpotDao;
+import app.payment.Payment;
+import app.payment.PaymentDao;
+import app.price.Price;
+import app.price.PriceDao;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.springframework.cglib.core.Local;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,12 +78,18 @@ public class ReservationController {
         String arrival = req.queryParams("arrival");
         String duration = req.queryParams("duration");
 
+        Price parking = PriceDao.getServiceAndPrice("parking");
+
         ParkingSpot parkingSpotNumber = ParkingSpotDao.getFreePremiumSpot();
 
         Reservation reservation = new Reservation(username, arrival, Integer.parseInt(duration), true, parkingSpotNumber.getId(), false);
+        //TODO decidere se il prezzo della prenotazione corrisponde a quello della sosta
+        //TODO il prezzo della sosta va ad ore
+        Payment payment = new Payment(username, LocalDate.now(), LocalTime.now(), "Sosta", parking.getPrice(), "Premium");
 
         //TODO controllo numero carta
         int error = ReservationDao.addReservation(reservation);
+        int errorPayment = PaymentDao.addPayment(payment);
 
         res.redirect("/reservation");
 

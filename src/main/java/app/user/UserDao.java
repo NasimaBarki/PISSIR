@@ -135,6 +135,9 @@ public class UserDao {
         else if(username.length() < MIN_FIELD_LENGTH){
             error = 12;
         }
+        else if(getUser(username) != null){
+            error = 13;
+        }
 
         return error;
     }

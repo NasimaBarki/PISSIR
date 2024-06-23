@@ -6,6 +6,7 @@ import app.logout.LogoutController;
 import app.parkingSpot.ParkingSpotController;
 import app.price.PriceController;
 import app.recharge.RechargeController;
+import app.reservation.ReservationController;
 import app.signup.SignupController;
 import spark.Spark;
 
@@ -40,6 +41,12 @@ public class App {
 
         //Prezzi
         Spark.get("/price", PriceController.servePricePage);
-        Spark.post("/price/parking", "application/json", PriceController.handleParkingPriceChange);
+        Spark.post("/price/parking", PriceController.handleParkingPriceChange);
+        Spark.post("/price/recharging", PriceController.handleRechargePriceChange);
+
+        //Prenotazioni
+        Spark.get("/reservation", ReservationController.serveReservationPage);
+        Spark.get("/reservationRequest", ReservationController.serveReservationRequestPage);
+        Spark.post("/reservationRequest", ReservationController.handleReservationPost);
     }
 }

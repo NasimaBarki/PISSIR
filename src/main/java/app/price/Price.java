@@ -2,9 +2,9 @@ package app.price;
 
 public class Price {
     private final String service;
-    private final int price;
+    private final float price;
 
-    public Price(String service, int price) {
+    public Price(String service, float price) {
         this.service = service;
         this.price = price;
     }
@@ -13,7 +13,7 @@ public class Price {
         return service;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 }

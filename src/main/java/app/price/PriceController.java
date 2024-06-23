@@ -26,8 +26,8 @@ public class PriceController {
         Price parkingPrice = PriceDao.getServiceAndPrice("parking");
         Price rechargingPrice = PriceDao.getServiceAndPrice("recharging");
 
-        model.put("parkingPrice", parkingPrice.getPrice());
-        model.put("rechargingPrice", rechargingPrice.getPrice());
+        model.put("parkingPrice", String.format("%.2f", parkingPrice.getPrice()));
+        model.put("rechargingPrice", String.format("%.2f", rechargingPrice.getPrice()));
 
         return new HandlebarsTemplateEngine().render(
                 new ModelAndView(model, "layouts/price.hbs")
@@ -35,12 +35,30 @@ public class PriceController {
     };
 
     public static Route handleParkingPriceChange = (Request req, Response res) -> {
-        String service = req.params("parking");
-        System.out.println(service);
+        String price = req.queryParams("parking");
+
+        int error = PriceDao.changePrice(Float.parseFloat(price), "parking");
+
+        //TODO display dell'errore nella pagina web
+        if(error == 0){
+            System.out.println("Impossibile cambiare il prezzo.");
+        }
 
         res.redirect("/price");
 
-        //Non va
+        return null;
+    };
+
+    public static Route handleRechargePriceChange = (Request req, Response res) -> {
+        String price = req.queryParams("recharging");
+
+        int error = PriceDao.changePrice(Float.parseFloat(price), "recharging");
+
+        if(error == 0){
+            System.out.println("Impossibile cambiare il prezzo.");
+        }
+
+        res.redirect("/price");
 
         return null;
     };

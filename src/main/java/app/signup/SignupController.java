@@ -83,6 +83,9 @@ public class SignupController {
             case 12:
                 errorMessage = "L'username deve contenere almeno tre caratteri.";
                 break;
+            case 13:
+                errorMessage = "L'username esiste già.";
+                break;
             default:
                 errorMessage = "Spiacenti, si è verificato un errore.";
         }

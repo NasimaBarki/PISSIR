@@ -1,6 +1,5 @@
 package app.login;
 
-import app.index.IndexController;
 import app.user.User;
 import app.user.UserDao;
 import spark.ModelAndView;
@@ -18,7 +17,16 @@ public class LoginController {
 
     //Visualizza la pagina di login
     public static Route serveLoginPage = (Request req, Response res) -> {
+        res.status(200);
+
         Map<Object, Object> model = new HashMap<>();
+
+        //Se c'è un messaggio di errore mostra il messaggio e compila il campo username prima della POST
+        if(req.session().attribute("errorMessage") != null){
+            model.put("username", req.session().attribute("username"));
+            model.put("errorMessage", req.session().attribute("errorMessage"));
+        }
+
         return new HandlebarsTemplateEngine().render(
                 new ModelAndView(model, "layouts/login.hbs")
         );
@@ -26,17 +34,22 @@ public class LoginController {
 
     //Gestione del login dell'utente
     public static Route handleLoginPost = (Request req, Response res) -> {
+        //Ottengo dal form username e password
         String username = req.queryParams("username");
         String password = req.queryParams("password");
 
+        //Messaggio di errore di default
         String errorMessage = "L'utente o la password sono errati.";
 
         int error;
 
+        //Controllo se l'username esiste. Se esiste vedo se la password è corretta
         error = userDao.getUserReturnError(username, password);
-        User user = userDao.getUser(username);
 
         if(error == 0){
+            User user = userDao.getUser(username);
+
+            //Ritorno come risposta della sessione username e ruolo
             req.session(true).attribute("authenticated", username);
             req.session(true).attribute("type", user.getType());
             int type = req.session().attribute("type");
@@ -46,24 +59,28 @@ public class LoginController {
             } else if (type == 2) {
                 req.session(true).attribute("admin", "true");
             }
-            res.redirect("/recharge");
+
+            if(user.getType() == 2){
+                res.redirect("/parkingSpots");
+            }
+            else{
+                res.redirect("/recharge");
+            }
         }
         else {
-            Map<Object, Object> model = new HashMap<>();
-
             if(error == 1){
                 errorMessage = "L'utente non esiste.";
             } else if(error == 2){
                 errorMessage = "La password è errata.";
             }
 
-            model.put("errorMessage", errorMessage);
-            model.put("username", username);
+            req.session().attribute("errorMessage", errorMessage);
+            req.session().attribute("username", username);
 
-            return new HandlebarsTemplateEngine().render(
-                    new ModelAndView(model, "layouts/login.hbs")
-            );
+            res.redirect("/login");
         }
+
+        res.status(201);
 
         return null;
     };

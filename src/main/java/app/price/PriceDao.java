@@ -24,7 +24,7 @@ public class PriceDao {
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
-                price = new Price(rs.getString("service"), rs.getInt("price"));
+                price = new Price(rs.getString("service"), rs.getFloat("price"));
             }
             st.close();
             conn.close();
@@ -33,5 +33,27 @@ public class PriceDao {
             e.printStackTrace();
         }
         return price;
+    }
+
+    public static int changePrice(float price, String service) {
+        int error = 0;
+
+        final String sql = "UPDATE prices SET price = ? WHERE service = ?";
+
+        try {
+            Connection conn = DBConnect.getInstance().getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setFloat(1, price);
+            st.setString(2, service);
+
+            error = st.executeUpdate();
+            st.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return error;
     }
 }

@@ -13,7 +13,9 @@ public class IndexController {
 
     //Visualizza la pagina home
     public static Route serveIndexPage = (Request req, Response res) -> {
-        //Far vedere prenotazioni al ruolo premium
+        res.status(200);
+
+        //Ruoli diversi visualizzano una barra di navigazione diversa
         String username = req.session().attribute("authenticated");
         String premium = req.session().attribute("premium");
         String admin = req.session().attribute("admin");

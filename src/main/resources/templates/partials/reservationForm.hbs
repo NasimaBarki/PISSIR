@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form method="post">
+                <div>
+                    <h2>Prenota un posto</h2>
+                    <div class="form-group">
+                        <label for="card">Numero carta:</label>
+                        <input name="card" type="text" id="card" class="form-control" placeholder="1111-2222-3333-4444" value="{{card}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="arrival">Giorno e orario di arrivo:</label>
+                        <input name="arrival" type="datetime-local" id="arrival" class="form-control" value="{{arrival}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Durata permanenza (in minuti):</label>
+                        <input name="duration" type="text" id="duration" class="form-control" placeholder="30" value="{{duration}}" required>
+                    </div>
+
+                    {{#if errorMessage}}
+                        <p id="error">{{errorMessage}}</p>
+                    {{/if}}
+
+                    <button type="submit" class="btn btn-primary">Prenota</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<table>
+    <tr>
+        <th>Numero posto</th>
+        <th>Disponibilità</th>
+    </tr>
+
+    {{#each parkingSpot}}
+        <tr>
+            <td>{{id}}</td>
+            <td>
+                {{#if available}}
+                    Occupato
+                {{else}}
+                    Libero
+                {{/if}}
+            </td>
+        </tr>
+    {{/each}}
+</table>
+
+<form action="/reservationRequest">
+    <button type="submit" class="btn btn-primary">Prenota un posto</button>
+</form>
+
+<table>
+    <tr>
+        <th>Numero prenotazione</th>
+        <th>Numero posto</th>
+        <th>Data</th>
+        <th>Durata</th>
+    </tr>
+
+    {{#each reservation}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{parkingSpotNumber }}</td>
+            <td>{{arrival}}</td>
+            <td>{{duration}}</td>
+        </tr>
+    {{/each}}
+</table>

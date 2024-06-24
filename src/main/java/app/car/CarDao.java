@@ -34,22 +34,12 @@ public class CarDao {
 
     public static int addCar(Car newCar) {
         int error = 0;
-        String sql = "SELECT username from reservations WHERE username = ?";
+        final String sql = "INSERT INTO cars(username, licensePlate, model, capacity) VALUES (?, ?, ?, ?)";
 
         try{
             Connection conn = DBConnect.getInstance().getConnection();
             PreparedStatement st = conn.prepareStatement(sql);
 
-            st.setString(1, newCar.getUsername());
-
-            ResultSet rs = st.executeQuery();
-
-            if(rs.next()){
-                error = 1;
-                return error;
-            }
-
-            sql = "INSERT INTO cars(username, licensePlate, model, capacity) VALUES (?, ?, ?, ?)";
             st = conn.prepareStatement(sql);
 
             st.setString(1, newCar.getUsername());

@@ -1,5 +1,6 @@
 package app.recharge;
 
+import app.car.CarDao;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -63,6 +64,9 @@ public class RechargeController {
         }
         if (admin != null){
             model.put("admin", admin);
+        }
+        if(CarDao.getCar(username) == null){
+            halt(401, "Devi inserire i dati della tua auto prima di poter richiedere una ricarica");
         }
 
         if(req.session().attribute("errorMessage") != null){

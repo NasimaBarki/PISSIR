@@ -1,5 +1,6 @@
 package app.reservation;
 
+import app.car.CarDao;
 import app.parkingSpot.ParkingSpot;
 import app.parkingSpot.ParkingSpotDao;
 import app.payment.Payment;
@@ -67,6 +68,10 @@ public class ReservationController {
             model.put("authenticated", username);
             model.put("premium", premium);
         } else halt(401, "Devi accedere ed essere un utente premium per visualizzare questa pagina.");
+
+        if(CarDao.getCar(username) == null){
+            halt(401, "Devi inserire i dati della tua auto prima di poter richiedere una ricarica");
+        }
 
         return new HandlebarsTemplateEngine().render(
                 new ModelAndView(model, "layouts/reservationRequest.hbs")

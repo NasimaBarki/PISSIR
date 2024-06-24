@@ -32,6 +32,7 @@ public class PaymentController {
         List<Payment> allPayments = PaymentDao.getAll();
 
         //Carica tutte le informazioni sui posti in model
+        //TODO display dei prezzi come float col simbolo euro finale
         String paymentJson = gson.toJson(allPayments);
         List<Payment> payments = gson.fromJson(paymentJson, new TypeToken<List<Payment>>(){}.getType());
         model.put("payment", payments);

@@ -32,6 +32,11 @@
                 <a class="nav-item dropdown-toggle my-sm-0 fw-bold" href="#" role="button"
                     data-toggle="dropdown">{{authenticated}}</a>
                 <ul class="dropdown-menu">
+                    {{#unless admin}}
+                    <li>
+                        <a class="dropdown-item" href="/car">La tua auto</a>
+                    </li>
+                    {{/unless}}
                     <li>
                         <a class="dropdown-item" href="/logout">Logout</a>
                     </li>

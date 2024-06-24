@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form method="post">
+                <div>
+                    <h2>Modifica le informazioni della tua auto</h2>
+                    <div class="form-group">
+                        <label for="licensePlate">Targa:</label>
+                        <input name="licensePlate" type="text" id="licensePlate" class="form-control" placeholder="AA1111AA" value="{{licensePlate}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="model">Modello:</label>
+                        <input name="model" type="text" id="model" class="form-control" value="{{model}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="capacity">Capacità:</label>
+                        <input name="capacity" type="number" id="capacity" class="form-control" placeholder="30" value="{{capacity}}" required>
+                    </div>
+
+                    {{#if errorMessage}}
+                        <p id="error">{{errorMessage}}</p>
+                    {{/if}}
+
+                    <button type="submit" class="btn btn-primary">Conferma modifiche</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

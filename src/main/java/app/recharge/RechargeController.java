@@ -17,6 +17,7 @@ public class RechargeController {
 
     //Pagina in cui si vede lo stato della ricarica
     public static Route serveRechargePage = (Request req, Response res) -> {
+        //TODO decidere se permettere all'admin di vedere questa pagina
         String username = req.session().attribute("authenticated");
         String premium = req.session().attribute("premium");
         String admin = req.session().attribute("admin");

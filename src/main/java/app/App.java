@@ -1,5 +1,6 @@
 package app;
 
+import app.car.CarController;
 import app.index.IndexController;
 import app.login.LoginController;
 import app.logout.LogoutController;
@@ -53,6 +54,12 @@ public class App {
         //Pagamenti
         Spark.get("/payment", PaymentController.servePaymentPage);
 
+        //Auto
+        Spark.get("/car", CarController.serveCarPage);
+        Spark.get("/changeCarInfo", CarController.serveChangeCarInfoPage);
+        Spark.get("/registerCar", CarController.serveRegisterCarPage);
+        Spark.post("/registerCar", CarController.handleRegisterCarPost);
+        Spark.post("/changeCarInfo", CarController.handleChangeCarInfoPost);
         //TODO far sapere agli utenti i prezzi dei servizi
     }
 }

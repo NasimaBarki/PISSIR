@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -50,7 +52,7 @@ public class PaymentDao {
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
-                Payment p = new Payment(rs.getInt("id"), rs.getString("username"), rs.getDate("date").toLocalDate(), rs.getTime("time").toLocalTime(), rs.getString("type"), rs.getFloat("price"), rs.getString("userType"));
+                    Payment p = new Payment(rs.getInt("id"), rs.getString("username"), LocalDate.parse(rs.getString("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd")), LocalTime.parse(rs.getString("time"), DateTimeFormatter.ofPattern("HH:mm:ss.SSS")), rs.getString("type"), rs.getFloat("price"), rs.getString("userType"));
                 payments.add(p);
             }
             st.close();

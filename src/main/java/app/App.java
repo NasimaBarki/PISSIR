@@ -43,6 +43,7 @@ public class App {
 
         //Prezzi
         Spark.get("/price", PriceController.servePricePage);
+        //TODO non sono post ma put
         Spark.post("/price/parking", PriceController.handleParkingPriceChange);
         Spark.post("/price/recharging", PriceController.handleRechargePriceChange);
 
@@ -59,6 +60,7 @@ public class App {
         Spark.get("/changeCarInfo", CarController.serveChangeCarInfoPage);
         Spark.get("/registerCar", CarController.serveRegisterCarPage);
         Spark.post("/registerCar", CarController.handleRegisterCarPost);
+        //TODO non è una post ma una put
         Spark.post("/changeCarInfo", CarController.handleChangeCarInfoPost);
         //TODO far sapere agli utenti i prezzi dei servizi
     }

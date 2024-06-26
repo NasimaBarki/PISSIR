@@ -70,7 +70,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "corretto-1.8 (2)",
-    "last_opened_file_path": "C:/Users/barki/Downloads/spark-web-master/spark-web-master",
+    "last_opened_file_path": "C:/Users/barki/Desktop/PISSIR/src/main/resources/public",
     "onboarding.tips.debug.path": "C:/Users/barki/Desktop/PISSIR/src/main/java/org/example/Main.java",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
@@ -80,6 +80,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\barki\Desktop\PISSIR\src\main\resources\public" />
       <recent name="C:\Users\barki\Desktop\PISSIR\src\main\java\app\mqtt" />
       <recent name="C:\Users\barki\Desktop\PISSIR\src\main\resources" />
     </key>

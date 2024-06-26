@@ -1,5 +1,6 @@
 package app.index;
 
+import org.springframework.web.client.RestTemplate;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -14,6 +15,8 @@ public class IndexController {
     //Visualizza la pagina home
     public static Route serveIndexPage = (Request req, Response res) -> {
         res.status(200);
+
+        RestTemplate rest = new RestTemplate();
 
         //Ruoli diversi visualizzano una barra di navigazione diversa
         String username = req.session().attribute("authenticated");

@@ -1,0 +1,178 @@
+.navbar,
+.container,
+footer {
+    background-color: #2a2e2e;
+}
+
+.container p,
+label,
+h2 {
+    color: white !important;
+}
+
+.nav-item,
+.navbar-brand,
+.nav-link {
+    color: white !important;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+.form {
+    top: 50px;
+    position: relative;
+    width: 40%;
+    padding: 50px;
+    margin-bottom: 100px;
+}
+
+#rechargeForm {
+    width: 50%;
+    padding: 50px 0px;
+}
+
+#error {
+    color: red;
+}
+
+table,
+th,
+td {
+    border: 3px solid;
+}
+
+#login {
+    border: 3px solid #59ff00;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+svg {
+    vertical-align: middle;
+}
+
+html,
+body {
+    font-weight: bold;
+    height: 100%;
+    position: relative;
+    min-height: 100%;
+}
+
+#title {
+    color: #59ff00 !important;
+}
+
+.form button {
+    width: 100%;
+    color: white;
+}
+
+button {
+    all: unset;
+    margin: 10px 0px;
+    border: 3px solid #59ff00;
+    text-decoration: none;
+    padding: 5px 0px;
+}
+
+.form a {
+    color: #59ff00;
+}
+
+.form label {
+    margin-top: 5px;
+    float: left;
+}
+
+#space {
+    height: 50px;
+}
+
+#loginForm {
+    margin-top: 50px;
+}
+
+#landingImage {
+    background-image: url(landingPage.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-height: 100%;
+    background-position: center top 60px;
+}
+
+#landingText {
+    padding: 0px 70px;
+}
+
+.dropdown-menu {
+    left: initial;
+    right: 0;
+}
+
+.breaker {
+    border: 1px solid rgb(152, 152, 152);
+    margin-bottom: 5px;
+}
+
+main > h2 {
+    color: black !important;
+}
+
+main {
+    margin: 0px 300px;
+}
+
+.recharge-request {
+    padding-left: 150px;
+    min-height: 250px;
+    padding: 50px
+}
+
+.recharge-request > h3 {
+    margin: 15px 0px;
+}
+
+#emptyImage {
+    height: 450px;
+}
+
+#mainButton {
+    border: 3px solid;
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #2a2e2e;
+    color: white;
+}
+
+#warning {
+    color: #D9FF00 !important;
+}
+
+table > td, th{
+    padding: 20px;
+}
+
+.offcanvas label {
+    color: black !important;
+}
+
+footer {
+   right: 0;
+   bottom:0;
+   left:0;
+}

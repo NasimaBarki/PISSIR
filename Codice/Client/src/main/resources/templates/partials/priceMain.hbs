@@ -1,0 +1,21 @@
+<main class="h-100">
+    <div class="d-flex justify-content-between mt-5">
+        <div class="bg-light p-5">
+            <h3>Prezzo corrente di sosta: {{prices.[0].price}}€</h3>
+            <form action="/price/parking" method="post">
+                <p>Modifica il prezzo sosta:</p>
+                <input type="number" name="parking" step=".01" min="0"/>
+                <button type="submit" id="mainButton">Aggiorna prezzo sosta</button>
+            </form>
+        </div>
+
+        <div class="bg-light p-5 ml-4">
+            <h3>Prezzo corrente di ricarica: {{prices.[1].price}}€</h3>
+            <form action="/price/recharging" method="post">
+                <p>Modifica il prezzo di ricarica</p>
+                <input type="number" name="recharging" step=".01" min="0"/>
+                <button type="submit" id="mainButton">Aggiorna prezzo ricarica</button>
+            </form>
+        </div>
+    </div>
+</main>

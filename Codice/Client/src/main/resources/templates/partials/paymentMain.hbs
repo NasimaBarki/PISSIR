@@ -1,0 +1,46 @@
+<main class="text-center m-auto h-100">
+
+    <div class="row text-center h-100">
+        <div class="col-md-4 bg-light d-flex justify-content-center">
+            {{>partials/sidebar.hbs}}
+        </div>
+        <div id="space">
+        </div>
+
+        <div class="col-md-8 align-items-center">
+
+            <div id="space">
+            </div>
+
+            <h1 class="mt-5">Pagamenti</h1>
+
+            <table class="m-auto">
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Data</th>
+                    <th>Ora</th>
+                    <th>Servizio</th>
+                    <th>Prezzo</th>
+                    <th>Tipo Utente</th>
+                </tr>
+
+                {{#each payments}}
+                    <tr>
+                        <td class="double">{{id}}</td>
+                        <td>{{username}}</td>
+                        <td>{{date}}</td>
+                        <td>{{time}}</td>
+                        <td>{{type}}</td>
+                        <td>{{price}}</td>
+                        <td>{{userType}}</td>
+                    </tr>
+                {{/each}}
+            </table>
+
+            <div class="d-flex justify-content-center mt-4">
+                {{>partials/pagination.hbs}}
+            </div>
+        </div>
+    </div>
+</main>

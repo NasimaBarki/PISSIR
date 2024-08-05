@@ -1,0 +1,33 @@
+<div class="offcanvas offcanvas-start show m-auto" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+    <div class="offcanvas-header mt-2">
+        <h3 class="offcanvas-title" id="offcanvasLabel">FILTRI</h3>
+    </div>
+    <div class="offcanvas-body">
+        <form method="post">
+            <div class="form-group">
+                <label for="start">Giorno:</label>
+                <input name="start" type="date" id="start" class="form-control" value="{{start}}">
+            </div>
+
+            <div class="form-group">
+                <label for="service">Servizio:</label>
+                <select name="service" class="form-select" aria-label="Default select example">
+                    <option value="nothing">Nessuno</option>
+                    <option value="Sosta">Sosta</option>
+                    <option value="Sosta e Ricarica">Ricarica</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="userType">Tipologia utente:</label>
+                <select name="userType" class="form-select" aria-label="Default select example">
+                    <option value="nothing">Nessuno</option>
+                    <option value="Base">Base</option>
+                    <option value="Premium">Premium</option>
+                </select>
+            </div>
+
+            <button type="submit" id="mainButton">Applica filtri</button>
+        </form>
+    </div>
+</div>

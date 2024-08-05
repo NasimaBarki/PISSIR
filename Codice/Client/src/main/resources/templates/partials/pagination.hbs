@@ -1,0 +1,14 @@
+<nav>
+    <ul class="pagination">
+        {{#unless noPrev}}
+            <li class="page-item"><a class="page-link" href="?action=prev">
+                <span aria-hidden="true">&laquo;</span>
+            </a></li>
+        {{/unless}}
+        {{#unless noNext}}
+            <li class="page-item ml-2"><a class="page-link" href="?action=next">
+                <span aria-hidden="true">&raquo;</span>
+            </a></li>
+        {{/unless}}
+    </ul>
+</nav>

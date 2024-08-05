@@ -1,0 +1,44 @@
+<main class="h-100 m-0">
+    <div class="container form">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <form method="post">
+                    <div>
+                        <h2 class="text-center">PAGAMENTO</h2>
+                        <p id="warning">Importo: {{sum}}€</p>
+                        <div class="form-group">
+                            <label for="card">Mastercard:</label>
+                            <input name="card" type="text" id="card" class="form-control" placeholder="1111 2222 3333 4444"
+                                   value="{{card}}" required>
+                        </div>
+
+                        {{#if errorMessage}}
+                            <p id="error">{{errorMessage}}</p>
+                        {{/if}}
+
+                        <button type="submit">Paga</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    //Inserisce uno spazio dopo 4 caratteri
+    const input = document.getElementById("card");
+    input.addEventListener("input", () => input.value = formatNumber(input.value.replaceAll(" ", "")));
+
+    const formatNumber = (number) => number.split("").reduce((seed, next, index) => {
+      if (index !== 0 && !(index % 4)) seed += " ";
+      return seed + next;
+    }, "");
+
+    //I giorni prima del corrente non sono selezionabili dal calendario
+    const dateInput = document.getElementById("arrival");
+    const now = new Date();
+    const nowHour = now.getHours();
+    const nowMinute = now.getMinutes();
+
+    dateInput.min = new Date(now.getFullYear(), now.getMonth(), now.getDate(), nowHour, nowMinute).toISOString().slice(0, 16);
+</script>

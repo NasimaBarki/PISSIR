@@ -1,0 +1,40 @@
+<main class="text-center h-100">
+
+    <h1>Monitoraggio posti</h1>
+
+    <div class="text-center mt-5">
+        <div class="d-flex justify-content-center">
+            <table>
+                <tr>
+                    <th>Numero posto</th>
+                    <th>Disponibilità</th>
+                    <th>Prenotabile</th>
+                </tr>
+
+                {{#each parkingSpots}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>
+                        {{#if available}}
+                        Occupato
+                        {{else}}
+                        Libero
+                        {{/if}}
+                    </td>
+                    <td class="p-2">
+                        {{#if premium}}
+                        Prenotabile
+                        {{else}}
+                        Non prenotabile
+                        {{/if}}
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
+            {{>partials/pagination.hbs}}
+        </div>
+    </div>
+</main>

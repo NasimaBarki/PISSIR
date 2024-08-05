@@ -1,0 +1,25 @@
+<main class="text-center h-100">
+    {{#if noCar}}
+        <img id="emptyImage" src="noCar.svg" alt="">
+        <h1>Non hai ancora registrato la tua auto</h1>
+        <p class="text-secondary">Prima di poter effettuare una richiesta di ricarica devi inserire i dati della tua auto cliccando il tuo profilo e poi "La mia auto"</p>
+    {{else if noReservation}}
+        <img id="emptyImage" src="noReservation.svg" alt="">
+        <h1>Nessuna prenotazione</h1>
+        <p class="text-secondary">Per questo orario è possibile prenotare {{emptyPremiumParkingSpots}} posti auto</p>
+        <form action="/reservationRequest">
+            <button type="submit" id="mainButton">Prenota un posto</button>
+        </form>
+    {{else}}
+        <h1>La tua prenotazione</h1>
+
+        <div id="space"></div>
+
+        <div class="bg-light d-flex justify-content-center flex-column recharge-request text-left">
+            <h3>Numero prenotazione: <span class="double">{{reservation.id}}</span></h3>
+            <h3>Numero posto auto: <span class="double">{{reservation.parkingSpotNumber}}</span></h3>
+            <h3>Data: {{reservation.arrival}}</h3>
+            <h3>Fine permanenza: {{reservation.reservationEnd}}</h3>
+        </div>
+    {{/if}}
+</main>

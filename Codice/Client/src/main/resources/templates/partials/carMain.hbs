@@ -1,0 +1,20 @@
+<main class="text-center h-100">
+    {{#if car.licensePlate}}
+        <h1>La tua auto</h1>
+
+        <div id="space"></div>
+
+        <div class="bg-light d-flex justify-content-center flex-column recharge-request text-left">
+            <h3>Targa auto: {{car.licensePlate}}</h3>
+            <h3>Modello: {{car.model}}</h3>
+            <h3>Capacità: <span class="double">{{car.capacity}}</span> kWh</h3>
+        </div>
+    {{else}}
+        <img id="emptyImage" src="noCar.svg" alt="">
+        <h1>Non hai ancora registrato la tua auto</h1>
+        <p class="text-secondary">Registra la tua auto per poter usufruire dei nostri servizi</p>
+        <form action="/registerCar">
+            <button id="mainButton" type="submit" class="btn btn-primary">Aggiungi auto</button>
+        </form>
+    {{/if}}
+</main>

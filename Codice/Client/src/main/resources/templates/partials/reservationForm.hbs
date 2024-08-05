@@ -1,0 +1,53 @@
+<div class="container form">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <form method="post">
+                <div>
+                    <h2 class="text-center">PRENOTAZIONE</h2>
+                    <div class="form-group">
+                        <label for="card">Mastercard:</label>
+                        <input name="card" type="text" id="card" class="form-control" placeholder="1111 2222 3333 4444"
+                            value="{{card}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="arrival">Giorno e orario di arrivo:</label>
+                        <input name="arrival" type="datetime-local" id="arrival" class="form-control"
+                            value="{{arrival}}" min="2024-07-05" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Durata permanenza (in minuti):</label>
+                        <input name="duration" type="text" id="duration" class="form-control" placeholder="30"
+                            value="{{duration}}" required>
+                    </div>
+
+                    {{#if errorMessage}}
+                    <p id="error">{{errorMessage}}</p>
+                    {{/if}}
+
+                    <button type="submit">Prenota</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    //Inserisce uno spazio dopo 4 caratteri
+    const input = document.getElementById("card");
+    input.addEventListener("input", () => input.value = formatNumber(input.value.replaceAll(" ", "")));
+
+    const formatNumber = (number) => number.split("").reduce((seed, next, index) => {
+      if (index !== 0 && !(index % 4)) seed += " ";
+      return seed + next;
+    }, "");
+
+    //I giorni prima del corrente non sono selezionabili dal calendario
+    const dateInput = document.getElementById("arrival");
+    const now = new Date();
+    const nowHour = now.getHours();
+    const nowMinute = now.getMinutes();
+
+    dateInput.min = new Date(now.getFullYear(), now.getMonth(), now.getDate(), nowHour, nowMinute).toISOString().slice(0, 16);
+</script>
